@@ -1,0 +1,77 @@
+.main {
+  position: absolute;
+  background-color: rgba(17, 17, 17, 0.7);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.infopage {
+  position: absolute;
+  width: 250px;
+  background-color: white;
+  border-radius: 24px;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.infopage_info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infopage_text {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  width: 100%;
+  text-align: center;
+  font-family: OpenRundeRegular;
+}
+
+.infopage_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    color: rgba(128, 128, 152, 1);
+    font-size: 14px;
+    font-family: OpenRundeRegular;
+  }
+
+  button {
+    background-color: rgba(92, 92, 214, 1);
+    border: none;
+    outline: none;
+    color: white;
+    font-family: OpenRundeRegular;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+video {
+  object-fit: cover;
+}
+
+.close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 1rem;
+  top: 1rem;
+  background-color: rgba(54, 54, 85, 0.5);
+  border: none;
+  outline: none;
+  height: 32px;
+  width: 32px;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 1;
+}

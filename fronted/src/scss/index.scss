@@ -1,0 +1,46 @@
+@import "./fonts.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  scrollbar-width: none !important;
+  overflow-x: hidden;
+  font-family: OpenRundeMedium;
+  color: rgba(40, 40, 62, 1);
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(#f7f7fd, #ebebfa);
+}
+
+#root {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 24px;
+  color: #50507c;
+  font-family: OpenRundeSemibold;
+}
+
+h2 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  font-family: OpenRundeSemibold;
+  color: #50507c;
+}
+
+textarea {
+  resize: none;
+  border: none;
+  outline: none;
+  color: black !important;
+  font-size: 16px;
+  min-height: 20px;
+}

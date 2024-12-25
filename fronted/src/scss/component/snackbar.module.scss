@@ -1,0 +1,52 @@
+.main {
+  width: calc(100% - 54px);
+  position: absolute;
+  display: flex;
+  background-color: #5c5cd6;
+  height: 54px;
+  border-radius: 24px;
+  justify-content: space-between;
+  align-items: center;
+  animation: anim infinite 2.5s cubic-bezier(0, 1, 0.4, 1);
+  padding: 0 16px 0 6px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes anim {
+  0% {
+    top: -54px;
+  }
+  50% {
+    top: 16px;
+  }
+  100% {
+    top: -54px;
+  }
+}
+
+.button {
+  background: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: 6px 12px;
+  color: #5c5cd6;
+  outline: none;
+  cursor: pointer;
+}
