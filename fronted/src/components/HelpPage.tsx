@@ -37,18 +37,16 @@ export function HelpPage() {
         >
           <CloseSVG />
         </button>
-        <video
-          autoPlay
-          src={`/video/${
+        <img
+          src={`/img/${
             activehelp == "1/3"
               ? "help1"
               : activehelp == "2/3"
               ? "help2"
               : "help3"
-          }.mp4`}
+          }.png`}
           width="100%"
           height="200px"
-          loop
         />
         <div className={style.infopage_info}>
           <div className={style.infopage_text}>

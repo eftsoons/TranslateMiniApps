@@ -172,7 +172,7 @@ export function WordsButton({
                       : "white",
                     color: activebutton.includes(index) ? "white" : "",
                     transition: "background-color 0.5s",
-                    fontSize: "22px",
+                    fontSize: "17px",
                     cursor: "pointer",
                     display: "flex",
                     justifyContent: "center",
@@ -276,7 +276,7 @@ export function WordsButton({
                   : "white",
                 color: activebutton.includes(index) ? "white" : "",
                 transition: "background-color 0.5s",
-                fontSize: "22px",
+                fontSize: "17px",
                 cursor: "pointer",
                 display: "flex",
                 justifyContent: "center",
@@ -346,7 +346,7 @@ export function WordsButton({
               justifyContent: "center",
               alignItems: "center",
               userSelect: "text",
-              fontSize: "22px",
+              fontSize: "17px",
             }}
           >
             {text}

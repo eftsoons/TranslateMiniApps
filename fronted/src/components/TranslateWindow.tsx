@@ -117,19 +117,26 @@ export function TranslateWindow({
             }}
             onClick={() => {
               if (translate) {
-                //const voices = speechSynthesis.getVoices();
-
-                if (speechSynthesis.speaking) {
-                  speechSynthesis.cancel();
-
-                  speechSynthesis.speak(
-                    new SpeechSynthesisUtterance(translate)
+                const idsetinterval = setInterval(() => {
+                  const utterance = new SpeechSynthesisUtterance(translate);
+                  const voices = speechSynthesis.getVoices();
+                  const voice = voices.find(
+                    (data) => data.name == "Google US English"
                   );
-                } else {
-                  speechSynthesis.speak(
-                    new SpeechSynthesisUtterance(translate)
-                  );
-                }
+                  if (voice) {
+                    utterance.voice = voice;
+
+                    if (speechSynthesis.speaking) {
+                      speechSynthesis.cancel();
+
+                      speechSynthesis.speak(utterance);
+                    } else {
+                      speechSynthesis.speak(utterance);
+                    }
+
+                    clearInterval(idsetinterval);
+                  }
+                }, 200);
               }
             }}
           >
@@ -147,7 +154,7 @@ export function TranslateWindow({
             border: "none",
             outline: "none",
             color: "rgba(40, 40, 62, 1)",
-            fontSize: "22px",
+            fontSize: "17px",
             fontFamily: "OpenRundeMedium",
             width: "100%",
           }}
@@ -255,14 +262,27 @@ export function TranslateWindow({
               justifyContent: "end",
             }}
             onClick={() => {
-              if (translate) {
-                if (speechSynthesis.speaking) {
-                  speechSynthesis.cancel();
+              if (text) {
+                const idsetinterval = setInterval(() => {
+                  const utterance = new SpeechSynthesisUtterance(text);
+                  const voices = speechSynthesis.getVoices();
+                  const voice = voices.find(
+                    (data) => data.name == "Google русский"
+                  );
+                  if (voice) {
+                    utterance.voice = voice;
 
-                  speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-                } else {
-                  speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-                }
+                    if (speechSynthesis.speaking) {
+                      speechSynthesis.cancel();
+
+                      speechSynthesis.speak(utterance);
+                    } else {
+                      speechSynthesis.speak(utterance);
+                    }
+
+                    clearInterval(idsetinterval);
+                  }
+                }, 200);
               }
             }}
           >
