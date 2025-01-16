@@ -10,6 +10,10 @@
   color: rgba(40, 40, 62, 1);
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   height: 100vh;
   overflow: hidden;
@@ -18,7 +22,7 @@ body {
 
 #root {
   height: 100%;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 h1 {

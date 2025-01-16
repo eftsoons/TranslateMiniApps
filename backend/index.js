@@ -5,8 +5,7 @@ dotenv.config();
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
-
-const { translate } = require("@vitalets/google-translate-api");
+const axios = require("axios");
 
 const app = express();
 app.use(express.json());
@@ -17,25 +16,32 @@ app.use((req, res, next) => {
     if (CheckValid(req.body.initData)) {
       next();
     } else {
-      next();
-      //res.statusCode(404).send("error");
+      res.status(404).send("error");
     }
   } catch {
-    next();
+    res.status(404).send("error");
   }
-});
-
-app.get("/", (req, res) => {
-  res.send("ok");
 });
 
 app.post("/translate", (req, res) => {
   const text = req.body.text;
-  translate(text, {
-    to: /[a-zA-Z]/.test(text) ? "ru" : "en",
-  })
-    .then((response) => res.send(response.text))
-    .catch(() => res.send("error many requests"));
+  const isenglish = /[a-zA-Z]/.test(text);
+
+  axios
+    .post(
+      isenglish
+        ? "https://rolling-kyle-realdeal-47d00cd3.koyeb.app/translate_to_russian"
+        : "https://rolling-kyle-realdeal-47d00cd3.koyeb.app/translate_native_words",
+      { text: text }
+    )
+    .then((response) => {
+      if (isenglish) {
+        res.send(response.data.translated_text);
+      } else {
+        res.send(Object.values(response.data.translations).join(" "));
+      }
+    })
+    .catch(() => res.status(404).send("error translate"));
 });
 
 app.listen(6354, () => {

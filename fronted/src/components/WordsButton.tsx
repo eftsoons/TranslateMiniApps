@@ -26,20 +26,26 @@ export function WordsButton({
 
   //console.log(childrenarray);
 
-  const { activebutton, setactivebutton, setinfodescription } =
-    useContext(ThemeContext);
-
-  if (!activebutton || !setactivebutton) {
-    return <Navigate to="/hellopage" />;
-  }
-
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activedown, setactivedown] = useState(false);
 
-  const { activehelp, buttonhelp, setactivehelp, setbuttonhelp } =
-    useContext(ThemeContext);
+  const {
+    activebutton,
+    setactivebutton,
+    setinfodescription,
+    activehelp,
+    buttonhelp,
+    setactivehelp,
+    setbuttonhelp,
+  } = useContext(ThemeContext);
 
-  if (!setactivehelp || !setbuttonhelp || !setinfodescription) {
+  if (
+    !setactivehelp ||
+    !setbuttonhelp ||
+    !setinfodescription ||
+    !activebutton ||
+    !setactivebutton
+  ) {
     return <Navigate to="/" />;
   }
 
@@ -67,12 +73,17 @@ export function WordsButton({
       setactivebutton((button: Array<number>) => {
         const setbutton = [...button];
 
+        setbutton.splice(0, button.length);
+
+        setbutton.push(index);
+
         if (!setbutton.includes(index)) {
           setbutton.push(index);
         }
 
         return setbutton;
       });
+
       setactivedown(true);
     }
   };
@@ -112,10 +123,9 @@ export function WordsButton({
       }
     }
 
-    //settext(activebutton.map((data) => childrenarray[data]).join(" "));
-    const texttranslate = activebutton
-      .map((data) => childrenarray[data])
-      .join(" ");
+    const texttranslate = activedown
+      ? activebutton.map((data) => childrenarray[data]).join(" ")
+      : childrenarray[0];
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/translate`, {
@@ -157,6 +167,7 @@ export function WordsButton({
               >
                 <div
                   ref={(el) => (buttonRefs.current[index] = el)}
+                  id={String(index)}
                   style={{
                     borderRadius: "12px",
                     padding: "12px",
@@ -211,7 +222,22 @@ export function WordsButton({
                   onMouseOver={() => onmove(index)}
                   onMouseUp={onup}
                   onTouchStart={() => ondown(index)}
-                  onTouchMove={() => onmove(index)}
+                  onTouchMove={(event) => {
+                    const touches = event.touches;
+                    for (let i = 0; i < touches.length; i++) {
+                      const touch = touches[i];
+                      const elements = document.elementsFromPoint(
+                        touch.clientX,
+                        touch.clientY
+                      );
+
+                      const index = elements[0].id;
+
+                      if (index && index != "") {
+                        onmove(Number(index));
+                      }
+                    }
+                  }}
                   onTouchEnd={onup}
                 >
                   {text}
@@ -260,6 +286,7 @@ export function WordsButton({
           ) : (
             <div
               key={index}
+              id={String(index)}
               ref={(el) => (buttonRefs.current[index] = el)}
               style={{
                 borderRadius: "12px",
@@ -282,57 +309,26 @@ export function WordsButton({
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              onClick={() => {
-                setinfodescription({
-                  header: "info",
-                  content: [
-                    {
-                      header: "subinfo1",
-                      info: [
-                        {
-                          text: "asdasd",
-                          subtext: { type: "button", button: ["asd"] },
-                          typeicon: "number",
-                        },
-                      ],
-                    },
-                    {
-                      header: "subinfo2",
-                      info: [
-                        {
-                          text: "asdasd",
-                          subtext: { type: "button", button: ["asd"] },
-                          typeicon: "number",
-                        },
-                      ],
-                    },
-                    {
-                      header: "subinfo3",
-                      info: [
-                        {
-                          text: "asdasd",
-                          subtext: { type: "text", text: "asd" },
-                          typeicon: "book",
-                        },
-                      ],
-                    },
-                  ],
-                });
-                setactivebutton((button: Array<number>) => {
-                  const setbutton = [...button];
-
-                  setbutton.splice(0, button.length);
-
-                  setbutton.push(index);
-
-                  return setbutton;
-                });
-              }}
               onMouseDown={() => ondown(index)}
               onMouseOver={() => onmove(index)}
               onMouseUp={onup}
               onTouchStart={() => ondown(index)}
-              onTouchMove={() => onmove(index)}
+              onTouchMove={(event) => {
+                const touches = event.touches;
+                for (let i = 0; i < touches.length; i++) {
+                  const touch = touches[i];
+                  const elements = document.elementsFromPoint(
+                    touch.clientX,
+                    touch.clientY
+                  );
+
+                  const index = elements[0].id;
+
+                  if (index && index != "") {
+                    onmove(Number(index));
+                  }
+                }
+              }}
               onTouchEnd={onup}
             >
               {text}

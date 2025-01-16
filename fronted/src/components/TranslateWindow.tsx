@@ -116,6 +116,12 @@ export function TranslateWindow({
               justifyContent: "end",
             }}
             onClick={() => {
+              /*const audio = new Audio(
+                "https://storage.googleapis.com/eleven-public-prod/premade/voices/Xb7hH8MSUJpSbSDYk0k2/d10f7534-11f6-41fe-a012-2de1e482d336.mp3"
+              );
+
+              audio.play();*/
+
               if (translate) {
                 const idsetinterval = setInterval(() => {
                   const utterance = new SpeechSynthesisUtterance(translate);
@@ -157,6 +163,12 @@ export function TranslateWindow({
             fontSize: "17px",
             fontFamily: "OpenRundeMedium",
             width: "100%",
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              const target = event.target as HTMLInputElement;
+              target.blur();
+            }
           }}
           onBlur={(event) => {
             const textset = event.currentTarget.textContent;
@@ -262,6 +274,11 @@ export function TranslateWindow({
               justifyContent: "end",
             }}
             onClick={() => {
+              /*const audio = new Audio(
+                "https://storage.googleapis.com/eleven-public-prod/premade/voices/Xb7hH8MSUJpSbSDYk0k2/d10f7534-11f6-41fe-a012-2de1e482d336.mp3"
+              );
+
+              audio.play();*/
               if (text) {
                 const idsetinterval = setInterval(() => {
                   const utterance = new SpeechSynthesisUtterance(text);

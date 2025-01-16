@@ -11,5 +11,3 @@ export type InfoDescription = null | {
     }>;
   }>;
 };
-export type test2 = {};
-export type test3 = {};

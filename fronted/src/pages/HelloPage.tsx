@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Page } from "@/components/Page";
 import { useEffect } from "react";
+import { init, miniApp } from "@telegram-apps/sdk";
+
+init();
+miniApp.mount();
 
 export function HelloPage() {
   const navigation = useNavigate();
@@ -8,6 +12,7 @@ export function HelloPage() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigation("/edu");
+      miniApp.setHeaderColor("#f6f6ff");
     }, 3000);
 
     return () => clearTimeout(timeout);
@@ -17,14 +22,14 @@ export function HelloPage() {
     <Page
       style={{
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
+        justifyContent: "center",
         flexDirection: "column",
         height: "100%",
-        //marginBottom: "50px",
         backgroundColor: "rgba(239, 239, 251, 1)",
       }}
       onClick={() => {
+        miniApp.setHeaderColor("#f6f6ff");
         navigation("/edu");
       }}
     >

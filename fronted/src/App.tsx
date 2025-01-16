@@ -126,7 +126,7 @@ export function App() {
 
     postEvent("web_app_expand");
 
-    miniApp.setHeaderColor("#f6f6ff");
+    miniApp.setHeaderColor("#efeffb");
 
     navigation("/");
   }, []);
